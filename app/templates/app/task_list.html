@@ -1,0 +1,92 @@
+
+{% extends 'app/layout.html' %}
+{% block content %}
+
+{% if request.user.is_authenticated %}
+
+<a href="{% url 'logout' %}"><button class="logout-button">Logout</button></a>
+{% else %}
+<a href="{% url 'login' %}"><button>Login</button></a>
+{% endif %}
+
+<p class="user-name">Welcome, {{request.user}}!</p>
+
+<div class="table-container">
+<p class="todo-title">Start adding tasks to your list!</p>
+
+<a href="{% url 'task-create' %}"><button class="button-add-task">Add Task</button></a>
+
+<table>
+    <tr>
+        <th>Status</th>
+        <th>Tasks</th>
+    
+    </tr>
+    {% for task in tasks %}
+    <tr>
+        <td id = 'complete'>{% if task.complete %}✅{% else %}⌛{% endif %}</td>
+        <td>{{task.title}}</td>
+        <td id = 'edit'><a href="{% url 'task-update' task.id %}">✏️</a></td>
+        <td id = 'delete'><a href="{% url 'task-delete' task.id %}">🗑️</a></td>
+
+
+    </tr>
+    {% empty %}
+    <p>No tasks in list</p>
+    {% endfor %}
+</table>
+</div>
+<style>
+
+    .container {
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: right;
+    }
+    .table-container{
+        text-align: center;
+    }
+    .user-name {
+        text-align: right;
+        color: #555;
+        margin-bottom: 10px;
+    }
+    th, td {
+        padding: 8px;
+        text-align: center;
+        border: none;
+    }
+    td{
+        font-size: 12px;
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    tr:hover {
+        background-color: #e0e0e0; 
+        transition: background-color 0.3s ease;
+    }
+   .user-name{
+    text-align: center;
+   }
+    .no-items-message {
+        text-align: center;
+        color: #555;
+        margin-top: 20px;
+    }
+    #edit, #delete{
+        width: 20px;
+    } 
+    #complete{
+        width: 40px
+    }
+
+</style>
+
+{% endblock content%}
+
+

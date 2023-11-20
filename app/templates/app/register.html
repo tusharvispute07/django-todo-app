@@ -1,0 +1,35 @@
+{% extends 'app/layout.html' %}
+{% block content %}
+
+<h1>Register</h1>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <input type="text" name="{{ form.username.name }}" placeholder="Username" required>
+    <br>
+
+    <input type="password" name="{{ form.password.name }}" placeholder="Password" required>
+    <span class="password-instruction">Minimum 8 characters, at least one uppercase letter, one lowercase letter, and one number</span>
+    <br>
+
+    <input type="password" name="{{ form.confirm_password.name }}" placeholder="Confirm Password" required>
+    <br>
+
+    <button class="submit-button" type="submit">Submit</button>
+</form>
+
+<p>Already registered? <a href="{% url 'login' %}">Login</a></p>
+
+<style>
+    .password-instruction {
+        text-align: center;
+        font-size: 12px;
+        color: #555;
+        margin-top: 4px;
+        display: block;
+    }
+</style>
+
+{% endblock content %}
+

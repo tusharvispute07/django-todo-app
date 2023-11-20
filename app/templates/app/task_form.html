@@ -1,0 +1,45 @@
+{% extends 'app/layout.html' %}
+{% block content %}
+
+<p>Edit Task</p>
+<a href="{% url 'tasks' %}">Go back</a>
+<form method="POST" action="">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="{{ form.title.id_for_label }}">Title:</label>
+        {{ form.title }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.description.id_for_label }}">Description:</label>
+        {{ form.description }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.complete.id_for_label }}">Complete:</label>
+        {{ form.complete }}
+    </div>
+    <button class="submit-button" type="submit">Submit</button>
+</form>
+
+<style>
+    .form-group {
+        margin-bottom: 16px;
+        text-align: center;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: small;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+</style>
+
+{% endblock content %}
